@@ -1,0 +1,131 @@
+<YellowLab@Label>:
+	size_hint_y: 25
+    text_size: self.size
+    halign: 'center'
+    valign: 'middle'
+    font_size: 16
+    markup: True
+<TavNavButton@Button>:
+	background_color: 0.98, 1, 0, 1
+	canvas:
+		Color:
+			rgba: 0.98, 1, 0, 1
+		Ellipse:
+			pos: self.pos
+			size: self.size
+	canvas.after:
+		Color: 
+			rgba: 0, float(82.0/255.0), float(132.0/255.0),1
+		Line:
+			ellipse: self.x-2, self.y-2, (self.size[0])+2, (self.size[1])+2, 
+			width: 2
+
+# Root Widget Start
+FlyerRoot:
+<FlyerRoot>:
+	orientation: 'vertical'
+	AddHeader
+	AddIntroduction
+	TabNavigation
+	AddTab
+# Root Widget End
+
+<AddHeader>:
+	size_hint_y: None
+	height: '125dp'
+	orientation: 'vertical'
+	color: 0,82,132,1
+	canvas.before:
+		Color:
+			rgba:  0, float(82.0/255.0), float(132.0/255.0),1
+		Rectangle:
+			size: self.size
+			pos: self.pos
+	canvas.after:
+		Color:
+			rgba: 255,255,0,1
+		Rectangle:
+			size: self.size[0], (self.size[1] * 0.075)
+			pos: self.pos
+
+	Label:
+		id: label1
+		text: 'Flyer'
+		font_size: self.size[0]/6
+		halign: 'center'
+		valign: 'middle'
+		color: 255, 122,122,1
+
+<AddIntroduction>:
+	orientation: 'vertical'
+	padding: 5
+	canvas.before:
+		Color:
+			rgba: 0.152, 0.146 , 0.243, 1
+		Rectangle:
+			size: self.size
+			pos: self.pos
+	canvas.after:
+		Color:
+			rgba: 255,255,0,1
+		Rectangle:
+			size: self.size[0], (self.size[1] * 0.01)
+			pos: self.pos
+	Label:
+		size_hint_y: 25
+		halign: 'left'
+		text: 'Welcome, ' + root.user
+		text_size: self.size
+		font_size: 18
+	YellowLab:
+		text: '[color=F2F522][b]Status:[/b] In ' + root.location + '[/color]'
+	YellowLab:
+		text: '[color=F2F522][b]Last Updated[/b]: ' + root.last_updated + '[/color]'
+	YellowLab:
+		text: '[color=F2F522]Thought of The Day: \n' + root.daily_quote + '[/color]'
+		size_hint_y: 60
+
+<TabNavigation>:
+	cols: 3
+	rows: 1
+	padding: 10
+	canvas.before:
+		Color:
+			rgba: 0.152, 0.146 , 0.243, 1
+		Rectangle:
+			size: self.size
+			pos: self.pos
+	TavNavButton:
+		text: 'Hello'
+		canvas.before:
+			Ellipse:
+				source: '1.png'
+	TavNavButton:
+		text: 'Hello'
+	TavNavButton:
+		text: 'Hello'
+
+<AddTab@BoxLayout>:
+	padding: 10
+	tab_no: 1
+	canvas.before:
+		Color:
+			rgba: 0.152, 0.146 , 0.243, 1
+		Rectangle:
+			size: self.size
+			pos: self.pos 
+	BoxLayout:
+		canvas.before:
+			Color: 
+				rgba:  0, float(82.0/255.0), float(132.0/255.0),1
+			Rectangle:
+				size: self.size
+				pos: self.pos 
+		canvas:
+			Color:
+				rgba: 0, float(82.0/255.0), float(132.0/255.0),11
+			Ellipse:
+				segments: 3
+				pos: (self.size[0]/5)*root.tab_no, self.size[1]
+				size: 30, 30
+
