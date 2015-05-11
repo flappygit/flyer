@@ -1,10 +1,23 @@
+#Custom Widget Styling
+<YLabel@Label>:
+	markup: True
+	halign: 'center'
+	valign: 'middle'
+	font_size: '16sp'
+	text_size: self.size
+	input_text: None
+
 # Flyer Root Start
 FlyerRoot:
 <FlyerRoot>:
+	orientation: 'vertical'
 	FlyerHeader
+	FlyerIntro
 # Flyer Root End
 
 <FlyerHeader>:
+	height: '180dp'
+	size_hint_y: None
 	canvas.before:
 		Rectangle:
 			size: self.size
@@ -13,4 +26,33 @@ FlyerRoot:
 		Color: 
 			rgba: 0.964, 0.776, 0.047, 1
 		Rectangle:
+			pos: self.pos
 			size: self.size[0], self.size[1]*0.05
+<FlyerIntro>:
+	orientation: 'vertical'
+	padding: 5
+	canvas.before:
+		Color:
+			rgba: 0.152, 0.164, 0.243, 1
+		Rectangle:
+			size: self.size
+			pos: self.pos
+		Color: 
+			rgba: 0.964, 0.776, 0.047, 1
+		Rectangle:
+			pos: self.pos
+			size: self.size[0], 5
+	Label:
+		halign: 'left'
+		valign: 'top'
+		text: 'Welcome, ' + root.username
+		text_size: self.size
+		font_size: '18sp'
+	YLabel:
+		text: '[color=F4CB0D][b]Status:[/b] '+ root.status + '[/color]'
+	YLabel:
+		text: '[color=F4CB0D][b]Last Updated:[/b] ' + root.last_updated + '[/color]'
+	YLabel:
+		size_hint_y: 2
+		text: '[color=F4CB0D]' + root.daily_quote + '[/color]'
+
