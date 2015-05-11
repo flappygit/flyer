@@ -6,6 +6,19 @@
 	font_size: '16sp'
 	text_size: self.size
 	input_text: None
+<YRoundButton@Button>:
+	background_normal: 'white.jpg'
+	background_color: 0.964, 0.776, 0.047, 1
+	height: self.size[0]
+	size_hint_y: None
+	canvas.after:
+		Color: 
+			rgba: 0,0.349, 0.549, 1
+		Line:
+			rectangle: self.pos[0], self.pos[1], self.size[0], self.size[1]
+			width: 2
+
+
 
 # Flyer Root Start
 FlyerRoot:
@@ -13,6 +26,7 @@ FlyerRoot:
 	orientation: 'vertical'
 	FlyerHeader
 	FlyerIntro
+	FlyerTabNavigation
 # Flyer Root End
 
 <FlyerHeader>:
@@ -53,6 +67,39 @@ FlyerRoot:
 	YLabel:
 		text: '[color=F4CB0D][b]Last Updated:[/b] ' + root.last_updated + '[/color]'
 	YLabel:
-		size_hint_y: 2
+		size_hint_y: 2.5
 		text: '[color=F4CB0D]' + root.daily_quote + '[/color]'
+		font_size: 14
+
+<FlyerTabNavigation>:
+	cols: 1
+	rows: 2
+	GridLayout:
+		padding: 5
+		cols: 3
+		spacing: 10
+		canvas.before:
+			Color:
+				rgba: 0.152, 0.164, 0.243, 1
+			Rectangle:
+				size: self.size
+				pos: self.pos
+		YRoundButton:
+			canvas:
+				Rectangle:
+					source: '1.png'
+					size: self.size[0]*0.9, self.size[0]*0.9
+					pos: self.pos[0] + self.pos[1]*0.1, self.pos[1]
+		YRoundButton:
+			canvas:
+				Rectangle:
+					source: '2.png'
+					size: self.size[0]*0.9, self.size[0]*0.9
+					pos: self.pos[0] + self.pos[1]*0.1, self.pos[1]
+		YRoundButton:
+			canvas:
+				Rectangle:
+					source: '3.png'
+					size: self.size[0]*0.9, self.size[0]*0.9
+					pos: self.pos[0] + self.pos[1]*0.1, self.pos[1]
 
