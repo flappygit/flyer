@@ -7,8 +7,8 @@
 	text_size: self.size
 	input_text: None
 <YRoundButton@Button>:
-	background_normal: 'white.jpg'
-	background_color: 0.964, 0.776, 0.047, 1
+	background_normal: 'yellow_normal.png'
+	background_down: 'yellow_down.png'
 	height: self.size[0]
 	size_hint_y: None
 	canvas.after:
@@ -88,18 +88,18 @@ FlyerRoot:
 			canvas:
 				Rectangle:
 					source: '1.png'
-					size: self.size[0]*0.9, self.size[0]*0.9
-					pos: self.pos[0] + self.pos[1]*0.1, self.pos[1]
+					size: self.size[0]*0.8, self.size[0]*0.8
+					pos: self.pos[0] + self.size[0]*0.1, self.pos[1] + self.size[1]*0.1
 		YRoundButton:
 			canvas:
 				Rectangle:
 					source: '2.png'
-					size: self.size[0]*0.9, self.size[0]*0.9
-					pos: self.pos[0] + self.pos[1]*0.1, self.pos[1]
+					size: self.size[0]*0.8, self.size[0]*0.8
+					pos: self.pos[0] + self.size[0]*0.1, self.pos[1] + self.size[1]*0.1
 		YRoundButton:
 			canvas:
 				Rectangle:
 					source: '3.png'
-					size: self.size[0]*0.9, self.size[0]*0.9
-					pos: self.pos[0] + self.pos[1]*0.1, self.pos[1]
+					size: self.size[0]*0.8, self.size[0]*0.8
+					pos: self.pos[0] + self.size[0]*0.1, self.pos[1] + self.size[1]*0.1
 
