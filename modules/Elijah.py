@@ -36,8 +36,7 @@ def fetchLatestReports():
 	cursor.execute(sqlcmd)
 	data = cursor.fetchall()
 	conn.close()
-	print data
-	pass
+	return data
 
 def modifyReport(report_type, reportee_id, query_date, new_report_text):
 	conn = getFlyerConnector()
