@@ -15,11 +15,12 @@ from kivy.utils import get_color_from_hex
 from kivy.core.text import LabelBase
 from kivy.core.window import Window
 from kivy.properties import ObjectProperty
+from kivy.uix.tabbedpanel import TabbedPanel
+from kivy.factory import Factory
 
 
 class FlyerApp(App):
 	userIsValid = False
-
 
 	def login(self, userId, password):
 		return True
@@ -36,13 +37,16 @@ class FlyerApp(App):
 		print self.userIsValid
 
 		if self.userIsValid:
-			changeLayout()
+			self.changeLayout()
 		else:
-			showError()
+			self.showError()
 
 
 	def changeLayout(self):
-		pass
+		self.flyerTabs = Factory.FlyerTab()
+
+		self.root.clear_widgets()
+		self.root.add_widget(self.flyerTabs)
 
 	def showError(self):
 		pass

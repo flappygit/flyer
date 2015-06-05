@@ -1,4 +1,30 @@
 #:import C kivy.utils.get_color_from_hex
+
+<FlyerTab@TabbedPanel>:
+    pos_hint: {'center_x': .5, 'center_y': .5}
+    do_default_tab: False
+    background_image: 'blue.png'
+    tab_width: self.size[0]/3 - 1
+    tab_pos: 'top_mid'
+    tab_height: 50
+    background_normal: 'yellow_normal.png'
+    background_down: 'yellow_down.png'
+
+	TabbedPanelItem:
+		text: 'Status'
+
+		FlyerLbl:
+			text: 'Hello There'
+
+
+	TabbedPanelItem:
+		text: 'Reports'
+
+
+	TabbedPanelItem:
+		text: 'Hello'
+
+
 <Label>:
 	font_name: 'Riona'
 	markup: True
@@ -28,6 +54,7 @@ BoxLayout:
 	orientation: 'vertical'
 	padding: 10
 	spacing: 10
+	id: loginPage
 
 	FlyerLbl:
 		text: '[color=#FDDE2E]Flyer[/color]'
@@ -65,6 +92,7 @@ BoxLayout:
 		text: 'Log In'
 		size_hint_y: 1
 		on_press: app.getUserDetails()
+
 
 
 	
