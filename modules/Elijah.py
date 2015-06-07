@@ -1,7 +1,15 @@
 import MySQLdb
 import MySQLdb.cursors
 import datetime
+import codecs
 
+def encryptRot13(text):
+	"""Function to encrypt a given string using the rot13 cipher and return the encrypted string."""
+	return str(codecs.encode(text, 'rot_13'))
+
+def decryptRot13(text):
+	"""Function to decrypt a given string using the rot13 cipher and return the decrypted string."""
+	return str(codecs.decode(text, 'rot_13'))
 
 def getFlyerConnector():
 	"""This method returns a MySQLdb connector, create a cursor and use it."""
@@ -65,7 +73,7 @@ def login(user_id, password):
 	if len(data) == 0:
 		return False
 	else:
-		return (data["password"] == password)
+		return (decryptRot13(data[0]["password"]) == password)
 
 def getUserDetails(user_id):
 	"""For a user_id, this gives the user_name and email. Returns false if such a user doesn't exist."""
@@ -79,3 +87,21 @@ def getUserDetails(user_id):
 		return False
 	else:
 		return data[0] #data is a tuple of dictionaries with len=1 in this case
+
+def getEditableReports(user_id):
+	"""Given a user_id and report type, this function returns true if a user can edit it or false if he can't."""
+	conn = getFlyerConnector()
+	cursor = conn.cursor()
+	sqlcmd = """SELECT `editable_reports` FROM `user_records` WHERE `user_id` = "%s";""" %(user_id)
+	cursor.execute(sqlcmd)
+	data = cursor.fetchall()
+	conn.close()
+	if len(data) == 0:
+		return "NA"
+	else:
+		reports = data[0]["editable_reports"]
+		if reports == None:
+			reports = []
+			return reports
+		else:
+			return reports.split(',')
