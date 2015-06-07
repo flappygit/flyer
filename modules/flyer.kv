@@ -52,19 +52,19 @@
 <FlyerPassword@FlyerInput>:
     password: True
     
-<FlyerFooter>:
+<FlyerFooter@BoxLayout>:
     height: '180dp'
     size_hint_y: None
-    canvas.before:
+    canvas.after:
+        Color: 
+            rgba: 0.992, 0.871, 0.18, 0.9
+        Rectangle:
+            pos: self.pos
+            size: self.size[0], self.size[1]
         Rectangle:
             size: self.size
             pos: self.pos
             source: P('images','fk_banner.png')
-        Color: 
-            rgba: C('#0088D6')
-        Rectangle:
-            pos: self.pos
-            size: self.size[0], self.size[1]*0.05
 
 
 BoxLayout:
@@ -110,7 +110,7 @@ BoxLayout:
         FlyerPassword:
             id: password
             size_hint_y: 0.5
-            
+
     FlyerBtn:
         text: 'Log In'
         size_hint_y: 1
