@@ -1,0 +1,115 @@
+#: import C kivy.utils.get_color_from_hex
+#Custom Widget Styling
+<YLabel@Label>:
+	markup: True
+	halign: 'center'
+	valign: 'middle'
+	font_size: '16sp'
+	text_size: self.size
+	input_text: None
+<YButton@Button>:
+	background_normal: 'yellow_normal.png'
+	background_down: 'yellow_down.png'
+	height: self.size[0]
+	size_hint_y: None
+	canvas.after:
+		Color: 
+			rgba: 0,0.349, 0.549, 1
+		Line:
+			rectangle: self.pos[0], self.pos[1], self.size[0], self.size[1]
+			width: 2
+
+
+
+# Flyer Root Start
+FlyerRoot:
+<FlyerRoot>:
+	orientation: 'vertical'
+	FlyerHeader
+	FlyerIntro
+	FlyerTabs
+# Flyer Root End
+
+<FlyerHeader>:
+	height: '180dp'
+	size_hint_y: None
+	canvas.before:
+		Rectangle:
+			size: self.size
+			pos: self.pos
+			source: 'flyer_logo.png'
+		Color: 
+			rgba: 0.964, 0.776, 0.047, 1
+		Rectangle:
+			pos: self.pos
+			size: self.size[0], self.size[1]*0.05
+<FlyerIntro>:
+	orientation: 'vertical'
+	padding: 5
+	canvas.before:
+		Color: 
+			rgba: 0.964, 0.776, 0.047, 1
+		Rectangle:
+			pos: self.pos
+			size: self.size[0], 5
+	Label:
+		halign: 'left'
+		valign: 'top'
+		text: 'Welcome, ' + root.username
+		text_size: self.size
+		font_size: '18sp'
+	YLabel:
+		text: '[color=F4CB0D][b]Status:[/b] '+ root.status + '[/color]'
+	YLabel:
+		text: '[color=F4CB0D][b]Last Updated:[/b] ' + root.last_updated + '[/color]'
+	YLabel:
+		size_hint_y: 2.5
+		text: '[color=F4CB0D]' + root.daily_quote + '[/color]'
+		font_size: 14
+
+<FlyerTabs>:
+	orientation: 'vertical'
+	spacing: 30
+	padding: 5
+	GridLayout:
+		padding: 5
+		cols: 3
+		spacing: 10
+		YButton:
+			canvas:
+				Rectangle:
+					source: '1.png'
+					size: self.size[0]*0.8, self.size[0]*0.8
+					pos: self.pos[0] + self.size[0]*0.1, self.pos[1] + self.size[1]*0.1
+		YButton:
+			canvas:
+				Rectangle:
+					source: '2.png'
+					size: self.size[0]*0.8, self.size[0]*0.8
+					pos: self.pos[0] + self.size[0]*0.1, self.pos[1] + self.size[1]*0.1
+		YButton:
+			canvas:
+				Rectangle:
+					source: '3.png'
+					size: self.size[0]*0.8, self.size[0]*0.8
+					pos: self.pos[0] + self.size[0]*0.1, self.pos[1] + self.size[1]*0.1
+	FlyerTab:
+<FlyerTab@BoxLayout>:
+	tab_name: ""
+	canvas.before:
+		Color:
+			rgba: C('#00598C')
+		Rectangle:
+			size: self.size
+			pos: self.pos
+	canvas:
+		Color:
+			rgba: C('#00598C')
+		Ellipse:
+			segments: 3
+			pos: ((self.size[0]/3)*0.5)*1, self.pos[1] + self.size[1] - 8
+			size: 25, 25
+	Label:
+		text: root.tab_name
+		markup: True
+		font_size: '16sp'

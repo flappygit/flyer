@@ -1,5 +1,7 @@
 #:import C kivy.utils.get_color_from_hex
 #:import P os.path.join
+
+
 <FlyerTab@TabbedPanel>:
     pos_hint: {'center_x': .5, 'center_y': .5}
     do_default_tab: False
@@ -9,27 +11,27 @@
     tab_height: 50
     background_normal: P('images','yellow_normal.png')
     background_down: P('images','yellow_down.png')
-
 	TabbedPanelItem:
 		text: 'Status'
-
-		FlyerLbl:
-			text: 'Hello There'
-
-
+		FlyerTextView:
+			id: quote_space
+			text: 'Beware the alien, the mutant, the heretic. - [i]The Adeptus Astartes[/i] - [b]Warhammer 40,000[/b]'
 	TabbedPanelItem:
 		text: 'Reports'
-
-
 	TabbedPanelItem:
-		text: 'Hello'
-
+		text: 'Log'
 
 <Label>:
 	font_name: 'Riona'
 	markup: True
 <FlyerLbl@Label>:
 	font_size: 18
+<FlyerTextView@Label>:
+	size_hint_y: None
+	font_size: 16
+	text_size: self.width, None
+	height: self.texture_size[1]
+	markup: True
 <FlyerBtn@Button>:
 	font_name: 'Riona'
 	font_size: 18
@@ -50,8 +52,9 @@
 <FlyerPassword@FlyerInput>:
 	password: True
 
-BoxLayout:
 
+
+BoxLayout:
 	orientation: 'vertical'
 	padding: 5
 	spacing: 10

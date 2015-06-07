@@ -115,3 +115,19 @@ def changePassword(user_id, password):
 	cursor.execute(sqlcmd)
 	conn.commit()
 	conn.close()
+
+def getQuote():
+	"""Returns a random quote."""
+	import random
+	conn = getFlyerConnector()
+	cursor = conn.cursor()
+	sqlcmd = """SELECT * from quotes;"""
+	cursor.execute(sqlcmd)
+	data = cursor.fetchall()
+	conn.commit()
+	conn.close()
+	if len(data) == 0:
+		return {"quote": 'My power level is over 9000.', 'author': 'Vegeta', 'work': 'Dragon Ball Z'}
+	else:
+		return random.choice(data)
+
