@@ -42,12 +42,13 @@ class FlyerApp(App):
             self.showError()
 
     def changeLayout(self):
-        self.flyerTabs = Factory.FlyerTab()
+        self.flyer_open_panel = Factory.FlyerOpenPanel()
         self.root.clear_widgets()
         self.root.add_widget(self.flyerTabs)
         quote = Elijah.getQuote()
+        print quote
         #Use the random quote this gets and use it as the "quote_space" label text.
-
+        self.flyer_open_panel.ids.quote_space.text = quote
     def showError(self):
         pass
 
