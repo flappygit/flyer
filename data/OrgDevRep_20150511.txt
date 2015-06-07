@@ -1,3 +1,0 @@
-*Org dev line 1
-*org dev line 2
-*Org dev line 3
