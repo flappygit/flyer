@@ -1,3 +1,15 @@
-#!usr\bin\python
-# -*- coding: utf-8 -*-
-#flyer main file
+import os.path
+from kivy.core.window import Window
+from kivy.core.text import LabelBase
+from kivy.utils import get_color_from_hex
+from modules.flyerapp import FlyerApp
+from modules import Elijah
+
+if __name__ == "__main__":
+	Window.clearcolor = get_color_from_hex('#0088D6')
+	regular_font = os.path.join('fonts', 'RionaSans-Regular.ttf')
+	bold_font = os.path.join('fonts', 'RionaSans-Bold.ttf')
+	LabelBase.register(name='Riona',
+                       fn_regular=regular_font,
+                       fn_bold=bold_font)
+	FlyerApp().run()
