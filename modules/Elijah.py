@@ -111,7 +111,7 @@ def changePassword(user_id, password):
     encrypted_password = encryptRot13(password)
     conn = getFlyerConnector()
     cursor = conn.cursor()
-    sqlcmd = """UPDATE `user_records` SET `password`="%s" WHERE `user_id` = "%s";""" %(password, user_id)
+    sqlcmd = """UPDATE `user_records` SET `password`="%s" WHERE `user_id` = "%s";""" %(encrypted_password, user_id)
     cursor.execute(sqlcmd)
     conn.commit()
     conn.close()
