@@ -43,9 +43,10 @@ class FlyerApp(App):
 
     def changeLayout(self):
         self.flyerTabs = Factory.FlyerTab()
-
         self.root.clear_widgets()
         self.root.add_widget(self.flyerTabs)
+        quote = Elijah.getQuote()
+        #Use the random quote this gets and use it as the "quote_space" label text.
 
     def showError(self):
         pass

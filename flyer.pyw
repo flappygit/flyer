@@ -6,7 +6,7 @@ from modules.flyerapp import FlyerApp
 from modules import Elijah
 
 if __name__ == "__main__":
-	Window.clearcolor = get_color_from_hex('#0088D6')
+    Window.clearcolor = get_color_from_hex('#0088D6')
     regular_font = os.path.join('fonts', 'RionaSans-Regular.ttf')
     bold_font = os.path.join('fonts', 'RionaSans-Bold.ttf')
     italic_font = os.path.join('fonts', 'RionaSans-Italic.ttf')
