@@ -1,14 +1,14 @@
 #:import C kivy.utils.get_color_from_hex
-
+#:import P os.path.join
 <FlyerTab@TabbedPanel>:
     pos_hint: {'center_x': .5, 'center_y': .5}
     do_default_tab: False
-    background_image: 'blue.png'
+    background_image: P('images','blue.png')
     tab_width: self.size[0]/3 - 1
     tab_pos: 'top_mid'
     tab_height: 50
-    background_normal: 'yellow_normal.png'
-    background_down: 'yellow_down.png'
+    background_normal: P('images','yellow_normal.png')
+    background_down: P('images','yellow_down.png')
 
 	TabbedPanelItem:
 		text: 'Status'
@@ -33,15 +33,15 @@
 <FlyerBtn@Button>:
 	font_name: 'Riona'
 	font_size: 18
-	background_normal: 'yellow_normal.png'
-	background_down: 'yellow_down.png'
+	background_normal: P('images','yellow_normal.png')
+	background_down: P('images','yellow_down.png')
 	bold: True
 	border: (2,2,2,2)
 	color: C('##0088D6')
 <FlyerInput@TextInput>:
 	font_name: 'Riona'
-	font_size: 20
-	background_active: 'blue.png'
+	font_size: 24
+	background_active: P('images','blue.png')
 	background_color: C('#0088D6')
 	border: (2,2,2,2)
 	cursor_color: C('#FDDE2E')
@@ -53,13 +53,13 @@
 BoxLayout:
 
 	orientation: 'vertical'
-	padding: 10
+	padding: 5
 	spacing: 10
 	id: loginPage
 
 	FlyerLbl:
 		text: '[color=#FDDE2E]Flyer[/color]'
-		font_size: 60
+		font_size: 48
 		bold: True
 		canvas:
 			Color:
@@ -69,33 +69,34 @@ BoxLayout:
 				pos: self.pos
 		size_hint_y: 2
 
+	BoxLayout:
+		orientation: 'horizontal'
+		padding: 2
+		spacing: 5
 
-	FlyerLbl:
-		text: 'Select User:'
-		halign: 'left'
-		valign: 'middle'
-		size_hint_y: 0.5
+		FlyerLbl:
+			text: 'User ID:'
+			halign: 'left'
+			valign: 'middle'
+			size_hint_y: 0.5
 
-	FlyerInput:
-		id: user_id
-		color: C('#FDDE2E')
-		size_hint_y: 0.5
+		FlyerInput:
+			id: user_id
+			color: C('#FDDE2E')
+			size_hint_y: 0.5
+	BoxLayout:
+		orientation: 'horizontal'
+		padding: 5
+		spacing: 1
+		FlyerLbl:
+			text: 'Password:'
+			size_hint_y: 0.5
 
-	FlyerLbl:
-		text: 'Enter Password:'
-		size_hint_y: 0.5
-
-	FlyerInput:
-		id: password
-		size_hint_y: 0.5
+		FlyerPassword:
+			id: password
+			size_hint_y: 0.5
 
 	FlyerBtn:
 		text: 'Log In'
 		size_hint_y: 1
 		on_press: app.getUserDetails()
-
-
-
-	
-	         
-

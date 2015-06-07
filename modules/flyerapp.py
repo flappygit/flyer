@@ -20,41 +20,41 @@ from kivy.factory import Factory
 import Elijah
 
 class FlyerApp(App):
-	userIsValid = False
+    userIsValid = False
 
-	def login(self, user_id, password):
-		return True
+    def login(self, user_id, password):
+        return Elijah.login(user_id, password)
 
-	def getUserDetails(self):
-		self.user_id = self.root.ids.userId.text
-		self.password = self.root.ids.password.text
+    def getUserDetails(self):
+        self.user_id = self.root.ids.user_id.text
+        self.password = self.root.ids.password.text
 
-		print self.user_id
-		print self.password
+        print self.user_id
+        print self.password
 
-		self.userIsValid = self.login(self.userId, self.password)
+        self.userIsValid = self.login(self.user_id, self.password)
 
-		print self.userIsValid
+        print self.userIsValid
 
-		if self.userIsValid:
-			self.changeLayout()
-		else:
-			self.showError()
+        if self.userIsValid:
+            self.changeLayout()
+        else:
+            self.showError()
 
-	def changeLayout(self):
-		self.flyerTabs = Factory.FlyerTab()
+    def changeLayout(self):
+        self.flyerTabs = Factory.FlyerTab()
 
-		self.root.clear_widgets()
-		self.root.add_widget(self.flyerTabs)
+        self.root.clear_widgets()
+        self.root.add_widget(self.flyerTabs)
 
-	def showError(self):
-		pass
+    def showError(self):
+        pass
 
 if __name__ == '__main__':
-	Window.clearcolor = get_color_from_hex('#0088D6')
-	regular_font = os.path.join('fonts', 'RionaSans-Regular.ttf')
-	bold_font = os.path.join('fonts', 'RionaSans-Bold.ttf')
-	LabelBase.register(name='Riona',
+    Window.clearcolor = get_color_from_hex('#0088D6')
+    regular_font = os.path.join('fonts', 'RionaSans-Regular.ttf')
+    bold_font = os.path.join('fonts', 'RionaSans-Bold.ttf')
+    LabelBase.register(name='Riona',
                        fn_regular=regular_font,
                        fn_bold=bold_font)
-	FlyerApp().run()
+    FlyerApp().run()
