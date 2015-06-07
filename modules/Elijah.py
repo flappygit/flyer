@@ -105,3 +105,13 @@ def getEditableReports(user_id):
 			return reports
 		else:
 			return reports.split(',')
+
+def changePassword(user_id, password):
+	"""Given a user ID, this method modifies the password."""
+	encrypted_password = encryptRot13(password)
+	conn = getFlyerConnector()
+	cursor = conn.cursor()
+	sqlcmd = """UPDATE `user_records` SET `password`="%s" WHERE `user_id` = "%s";""" %(password, user_id)
+	cursor.execute(sqlcmd)
+	conn.commit()
+	conn.close()
