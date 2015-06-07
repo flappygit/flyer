@@ -2,24 +2,40 @@
 #:import P os.path.join
 
 
-<FlyerOpenPanel@TabbedPanel>:
-    pos_hint: {'center_x': .5, 'center_y': .5}
-    do_default_tab: False
-    background_image: P('images','blue.png')
-    tab_width: self.size[0]/3 - 1
-    tab_pos: 'top_mid'
-    tab_height: 50
-    background_normal: P('images','yellow_normal.png')
-    background_down: P('images','yellow_down.png')
-    TabbedPanelItem:
-        text: 'Status'
-        FlyerTextView:
-            id: quote_space
-            text: 'Beware the alien, the mutant, the heretic. - [i]The Adeptus Astartes[/i] - [b]Warhammer 40,000[/b]'
-    TabbedPanelItem:
-        text: 'Reports'
-    TabbedPanelItem:
-        text: 'Log'
+<FlyerOpenPanel@BoxLayout>:
+    orientation: 'vertical'
+    TabbedPanel:
+        pos_hint: {'center_x': .5, 'center_y': .5}
+        do_default_tab: False
+        background_image: P('images','blue.png')
+        tab_width: self.size[0]/3 - 1
+        tab_pos: 'top_mid'
+        tab_height: 50
+        background_normal: P('images','yellow_normal.png')
+        background_down: P('images','yellow_down.png')
+        TabbedPanelItem:
+            text: 'Status'
+            FlyerTextView:
+                id: quote_space
+                text: 'Beware the alien, the mutant, the heretic. - [i]The Adeptus Astartes[/i] - [b]Warhammer 40,000[/b]'
+        TabbedPanelItem:
+            text: 'Settings'
+            FlyerPasswordChanger:
+                id: flyer_password_changer
+    FlyerFooter
+
+<FlyerPasswordChanger@BoxLayout>
+    orientation: 'vertical'
+    FlyerLbl:
+        text: 'Enter New Password:'
+    FlyerPassword:
+        id: password_new_1
+    FlyerPassword:
+        id: password_new_2
+    FlyerBtn:
+        id: reset_password_button
+        text: "Change Password"
+
 
 <Label>:
     font_name: 'Riona'
@@ -28,7 +44,7 @@
     font_size: 18
 <FlyerTextView@Label>:
     size_hint_y: None
-    font_size: 16
+    font_size: 48
     text_size: self.width, None
     height: self.texture_size[1]
     markup: True
@@ -39,7 +55,7 @@
     background_down: P('images','yellow_down.png')
     bold: True
     border: (2,2,2,2)
-    color: C('##0088D6')
+    color: C('#0088D6')
 <FlyerInput@TextInput>:
     font_name: 'Riona'
     font_size: 24
@@ -51,16 +67,19 @@
     multiline: False
 <FlyerPassword@FlyerInput>:
     password: True
-    
 <FlyerFooter@BoxLayout>:
-    height: '180dp'
+    height: '100dp'
     size_hint_y: None
-    canvas.after:
+    orientation: 'horizontal'
+    canvas:
         Color: 
-            rgba: 0.992, 0.871, 0.18, 0.9
+            rgba: C('#0088D6')
         Rectangle:
             pos: self.pos
-            size: self.size[0], self.size[1]
+            size: self.size[0]*0.5, self.size[1]    
+    canvas:
+        Color:
+            rgba: C('#FFFFFF')
         Rectangle:
             size: self.size
             pos: self.pos

@@ -44,14 +44,21 @@ class FlyerApp(App):
     def changeLayout(self):
         self.flyer_open_panel = Factory.FlyerOpenPanel()
         self.root.clear_widgets()
-        self.root.add_widget(self.flyerTabs)
+        self.root.add_widget(self.flyer_open_panel)
         quote = Elijah.getQuote()
         print quote
         #Use the random quote this gets and use it as the "quote_space" label text.
         self.flyer_open_panel.ids.quote_space.text = quote
+        self.flyer_open_panel.ids.flyer_password_changer.ids.reset_password_button.bind(on_press=self.changePassword)
     def showError(self):
         pass
-
+    def changePassword(self, *args):
+        password_field_1 = self.flyer_open_panel.ids.flyer_password_changer.ids.password_new_1.text
+        password_field_2 = self.flyer_open_panel.ids.flyer_password_changer.ids.password_new_2.text
+        if password_field_1 == password_field_2:
+            self.password = password_field_1
+            Elijah.changePassword(self.user_id, self.password)
+            print "Changed password to %s" %self.password
 if __name__ == '__main__':
     Window.clearcolor = get_color_from_hex('#0088D6')
     regular_font = os.path.join('fonts', 'RionaSans-Regular.ttf')
