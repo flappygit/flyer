@@ -1,7 +1,7 @@
 [app]
 
 # (str) Title of your application
-title = "Flyer"
+title = Flyer
 
 # (str) Package name
 package.name = flyer
@@ -29,15 +29,11 @@ source.include_exts = py,png,jpg,kv,atlas
 #version.filename = %(source.dir)s/main.py
 
 # (str) Application versioning (method 2)
-version = 1.2.0
+version = 0.1.0
 
 # (list) Application requirements
 # comma seperated e.g. requirements = sqlite3,kivy
 requirements = kivy
-
-# (str) Custom source folders for requirements
-# Sets custom source for any requirements with recipes
-# requirements.source.kivy = ../../kivy
 
 # (list) Garden requirements
 #garden_requirements =
@@ -49,7 +45,7 @@ requirements = kivy
 #icon.filename = %(source.dir)s/data/icon.png
 
 # (str) Supported orientation (one of landscape, portrait or all)
-orientation = landscape
+orientation = portrait
 
 # (bool) Indicate if the application should be fullscreen or not
 fullscreen = 1
@@ -60,7 +56,7 @@ fullscreen = 1
 #
 
 # (list) Permissions
-#android.permissions = INTERNET
+android.permissions = INTERNET
 
 # (int) Android API to use
 #android.api = 14
@@ -69,7 +65,7 @@ fullscreen = 1
 #android.minapi = 8
 
 # (int) Android SDK version to use
-#android.sdk = 21
+android.sdk = 21
 
 # (str) Android NDK version to use
 #android.ndk = 9c
@@ -148,7 +144,7 @@ fullscreen = 1
 [buildozer]
 
 # (int) Log level (0 = error only, 1 = info, 2 = debug (with command output))
-log_level = 1
+log_level = 2
 
 # (int) Display warning if buildozer is run as root (0 = False, 1 = True)
 warn_on_root = 1
