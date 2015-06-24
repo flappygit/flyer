@@ -9,7 +9,7 @@ Last Edited: June 2015
 """
 
 from kivy.app import App
-from kivy.uix.boxlayout import BoxLayout 
+from kivy.uix.boxlayout import BoxLayout
 from kivy.utils import get_color_from_hex
 from kivy.core.text import LabelBase
 from kivy.core.window import Window
@@ -46,12 +46,30 @@ class FlyerApp(App):
         self.root.clear_widgets()
         self.root.add_widget(self.flyer_open_panel)
         quote = Elijah.getQuote()
+        self.putReports()
         #print quote
         #Use the random quote this gets and use it as the "quote_space" label text.
         self.flyer_open_panel.ids.quote_space.text = quote
         self.flyer_open_panel.ids.flyer_password_changer.ids.reset_password_button.bind(on_press=self.changePassword)
     def showError(self):
         self.root.ids.password.text = ""
+
+    def putReports(self):        
+        reports = Elijah.fetchLatestReports()
+        #print reports
+        report_dict = {
+            "Performance": {"Text": "", "Time Stamp":""},
+            "OrgDev": {"Text": "", "Time Stamp":""},
+            "Rewards": {"Text": "", "Time Stamp":""}
+        }
+        for report in reports:
+            report_dict[report["report_type"]]["Text"] = report["report_text"]
+            report_dict[report["report_type"]]["Time Stamp"] = report["time_stamp"]
+        self.flyer_open_panel.ids.perf_report.text = report_dict["Performance"]["Text"]
+        self.flyer_open_panel.ids.orgdev.text = report_dict["OrgDev"]["Text"]
+        self.flyer_open_panel.ids.rewards.text = report_dict["Rewards"]["Text"]
+
+
     def changePassword(self, *args):
         password_field_1 = self.flyer_open_panel.ids.flyer_password_changer.ids.password_new_1.text
         password_field_2 = self.flyer_open_panel.ids.flyer_password_changer.ids.password_new_2.text
@@ -59,6 +77,7 @@ class FlyerApp(App):
             self.password = password_field_1
             Elijah.changePassword(self.user_id, self.password)
             #print "Changed password to %s" %self.password
+
 if __name__ == '__main__':
     Window.clearcolor = get_color_from_hex('#0088D6')
     regular_font = os.path.join('fonts', 'RionaSans-Regular.ttf')

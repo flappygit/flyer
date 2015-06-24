@@ -1,53 +1,24 @@
 #:import C kivy.utils.get_color_from_hex
 #:import P os.path.join
 
-
-<FlyerOpenPanel@BoxLayout>:
-    orientation: 'vertical'
-    TabbedPanel:
-        pos_hint: {'center_x': .5, 'center_y': .5}
-        do_default_tab: False
-        background_image: P('images','blue.png')
-        tab_width: self.size[0]/3 - 1
-        tab_pos: 'top_mid'
-        tab_height: 50
-        background_normal: P('images','yellow_normal.png')
-        background_down: P('images','yellow_down.png')
-        TabbedPanelItem:
-            text: 'Status'
-            FlyerTextView:
-                id: quote_space
-                text: 'Beware the alien, the mutant, the heretic. - [i]The Adeptus Astartes[/i] - [b]Warhammer 40,000[/b]'
-        TabbedPanelItem:
-            text: 'Settings'
-            FlyerPasswordChanger:
-                id: flyer_password_changer
-    FlyerFooter
-
-<FlyerPasswordChanger@BoxLayout>
-    orientation: 'vertical'
-    FlyerLbl:
-        text: 'Enter New Password:'
-    FlyerPassword:
-        id: password_new_1
-    FlyerPassword:
-        id: password_new_2
-    FlyerBtn:
-        id: reset_password_button
-        text: "Change Password"
-
-
+#All labels must use Riona.
 <Label>:
     font_name: 'Riona'
     markup: True
+
+#Default label class
 <FlyerLbl@Label>:
     font_size: 18
+
+#Class to display longer text. Wraps around the screen.
 <FlyerTextView@Label>:
     size_hint_y: None
-    font_size: 48
+    font_size: 42
     text_size: self.width, None
     height: self.texture_size[1]
     markup: True
+
+#Default button.
 <FlyerBtn@Button>:
     font_name: 'Riona'
     font_size: 18
@@ -56,6 +27,8 @@
     bold: True
     border: (2,2,2,2)
     color: C('#0088D6')
+
+#Default text input, one line.
 <FlyerInput@TextInput>:
     font_name: 'Riona'
     font_size: 24
@@ -63,10 +36,14 @@
     background_color: C('#0088D6')
     border: (2,2,2,2)
     cursor_color: C('#FDDE2E')
-    padding: [5, ( self.height - self.line_height ) / 2] 
+
     multiline: False
+
+#Password dialog.
 <FlyerPassword@FlyerInput>:
     password: True
+
+#Footer for the entire app.
 <FlyerFooter@BoxLayout>:
     height: '100dp'
     size_hint_y: None
@@ -76,7 +53,7 @@
             rgba: C('#0088D6')
         Rectangle:
             pos: self.pos
-            size: self.size[0]*0.5, self.size[1]    
+            size: self.size[0]*0.5, self.size[1]
     canvas:
         Color:
             rgba: C('#FFFFFF')
@@ -85,7 +62,161 @@
             pos: self.pos
             source: P('images','fk_banner.png')
 
+<YButton@Button>:
+    background_normal: 'yellow_normal.png'
+    background_down: 'yellow_down.png'
+    disable: True
+    height: self.size[0]
+    size_hint_y: None
+    canvas.after:
+        Color: 
+            rgba: 0,0.349, 0.549, 1
+        Line:
+            rectangle: self.pos[0], self.pos[1], self.size[0], self.size[1]
+            width: 2
 
+<FlyerOpenPanel@BoxLayout>:
+    orientation: 'vertical'
+    padding: 5
+    spacing: 5
+    FlyerLbl:
+        text: '[color=#FDDE2E][b]Flyer[/b][/color]'
+        font_size: 36
+        size_hint_y: 0.1
+        bold: True
+        canvas:
+            Color:
+                rgba: C('#FDDE2E')
+            Rectangle:
+                size: self.size[0], self.size[1]*0.1
+                pos: self.pos
+    Carousel:
+        size_hint_y: 0.80
+        loop: True
+        BoxLayout:
+            orientation: 'vertical'
+            padding: 20
+            spacing: 20
+            FlyerTextView:
+                id: quote_space
+                size_hint_y: 0.10
+                font_size: 22
+                text: '\n\nWelcome to [b]Flyer[/b].\nSwipe left for the reports.'                
+            FlyerTextView:
+                id: quote_space
+                font_size: 24
+                size_hint_y: 0.70
+                text: 'Beware the alien, the mutant, the heretic. - [i]The Adeptus Astartes[/i] - [b]Warhammer 40,000[/b]'
+        Carousel:
+            size_hint_y: 1
+            direction: "bottom"
+            BoxLayout:
+                orientation: 'vertical'
+                padding: 20
+                spacing: 20
+                FlyerTextView:
+                    size_hint_y: 0.1
+                    font_size: 20
+                    text: "Performance Report"
+                FlyerInput:
+                    id: perf_report
+                    size_hint_y: 0.75
+                    font_size: 18
+                    text: "Performance report text here."
+                    multiline: True
+                FlyerTextView:
+                    font_size: 10
+                    size_hint_y: 0.05
+                    halign: 'center'
+                    text: "Last Edited By Pavan"
+                AnchorLayout:
+                    size_hint_y: 0.1
+                    FlyerBtn:
+                        id: save_perf
+                        size_hint_x: 0.5
+                        text: "Save Changes"
+                        anchor_x: 'center'
+                        anchor_y: 'center'
+            BoxLayout:
+                orientation: 'vertical'
+                padding: 20
+                spacing: 20
+                FlyerTextView:
+                    size_hint_y: 0.1
+                    font_size: 20
+                    text: "Organizational Development"
+                FlyerInput:
+                    id: orgdev
+                    size_hint_y: 0.75
+                    font_size: 18
+                    multiline: True
+                    text: "Organizational Development report text here."
+                FlyerTextView:
+                    size_hint_y: 0.05
+                    font_size: 10
+                    halign: 'center'
+                    text: "Last Edited By Pavan"
+                AnchorLayout:
+                    size_hint_y: 0.1
+                    FlyerBtn:
+                        id: save_orgdev
+                        size_hint_x: 0.5
+                        text: "Save Changes"
+                        anchor_x: 'center'
+                        anchor_y: 'center'
+            BoxLayout:
+                orientation: 'vertical'
+                padding: 20
+                spacing: 20
+                FlyerTextView:
+                    size_hint_y: 0.1
+                    font_size: 20
+                    text: "Rewards"
+                FlyerInput:
+                    id: rewards
+                    size_hint_y: 0.75
+                    font_size: 18
+                    multiline: True
+                    text: "Rewards report text here."
+                FlyerTextView:
+                    size_hint_y: 0.05
+                    font_size: 10
+                    halign: 'center'
+                    text: "Last Edited By Pavan"
+                AnchorLayout:
+                    size_hint_y: 0.1
+                    FlyerBtn:
+                        id: save_rewards
+                        size_hint_x: 0.5
+                        text: "Save Changes"
+                        anchor_x: 'center'
+                        anchor_y: 'center'
+        FlyerPasswordChanger:
+            id: flyer_password_changer
+    FlyerFooter:
+        size_hint_y: 0.1
+
+<FlyerPasswordChanger@BoxLayout>
+    orientation: 'vertical'
+    padding: 20
+    spacing: 20
+    FlyerTextView:
+        text: 'Enter the New Password:'
+        font_size: 26
+        size_hint_y: 0.10
+    FlyerPassword:
+        id: password_new_1
+        size_hint_y: 0.20
+    FlyerPassword:
+        id: password_new_2
+        size_hint_y: 0.20
+    FlyerBtn:
+        id: reset_password_button
+        size_hint_y: 0.15
+        text: "Change Password"
+
+
+#Default main layout
 BoxLayout:
     orientation: 'vertical'
     padding: 5
@@ -103,32 +234,15 @@ BoxLayout:
                 pos: self.pos
         size_hint_y: 2
 
-    BoxLayout:
-        orientation: 'horizontal'
-        padding: 2
-        spacing: 5
-
-        FlyerLbl:
-            text: 'User ID:'
-            halign: 'left'
-            valign: 'middle'
-            size_hint_y: 0.5
-
-        FlyerInput:
-            id: user_id
-            color: C('#FDDE2E')
-            size_hint_y: 0.5
-    BoxLayout:
-        orientation: 'horizontal'
-        padding: 5
-        spacing: 1
-        FlyerLbl:
-            text: 'Password:'
-            size_hint_y: 0.5
-
-        FlyerPassword:
-            id: password
-            size_hint_y: 0.5
+    FlyerInput:
+        id: user_id
+        color: C('#FDDE2E')
+        size_hint_y: 0.5
+        text: "vinay.kt"
+    FlyerPassword:
+        id: password
+        size_hint_y: 0.5
+        text: "vinay87"
 
     FlyerBtn:
         text: 'Log In'
